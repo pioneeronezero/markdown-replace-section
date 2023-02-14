@@ -1,7 +1,12 @@
 import type { Heading, Root } from "mdast";
 import { remark } from "remark";
 
-export function replaceSection(document: string, headingName: string, content: string, hungry = true): string {
+export function replaceSection(
+  document: string,
+  headingName: string,
+  content: string,
+  hungry = true
+): string {
   const node = remark.parse(document);
 
   const heading = findHeading(document, node, headingName);
@@ -13,7 +18,11 @@ export function replaceSection(document: string, headingName: string, content: s
   return document;
 }
 
-function replaceRange(document: string, { start, end }: { start: number; end?: number; }, content: string) {
+function replaceRange(
+  document: string,
+  { start, end }: { start: number; end?: number },
+  content: string
+) {
   const before = document.slice(0, start);
   const after = document.slice(end);
 
@@ -44,7 +53,11 @@ function findSectionRange(node: Root, heading: Heading, hungry = true) {
   return { start: sectionStart, end: sectionEnd };
 }
 
-function findHeading(document: string, node: Root, name: string): Heading | undefined {
+function findHeading(
+  document: string,
+  node: Root,
+  name: string
+): Heading | undefined {
   for (const child of node.children) {
     const { type } = child;
 
@@ -63,12 +76,18 @@ function getContent(document: string, child: Heading) {
   if (child.children.length === 1) {
     if (child.children[0].position) {
       const position = child.children[0].position;
-      contentRange = { start: position.start.offset ?? 0, end: position.end.offset ?? 0 };
+      contentRange = {
+        start: position.start.offset ?? 0,
+        end: position.end.offset ?? 0,
+      };
     }
   } else if (child.children.length > 1) {
     const firstPosition = child.children[0].position;
     const lastPosition = child.children[child.children.length - 1].position;
-    contentRange = { start: firstPosition?.start.offset ?? 0, end: lastPosition?.end.offset ?? 0 };
+    contentRange = {
+      start: firstPosition?.start.offset ?? 0,
+      end: lastPosition?.end.offset ?? 0,
+    };
   }
 
   const { start, end } = contentRange;

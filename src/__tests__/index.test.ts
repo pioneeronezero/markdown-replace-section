@@ -3,17 +3,13 @@ import { replaceSection } from "../index";
 
 describe("replaceSection", () => {
   it("single text heading", () => {
-    const document =
-      "H1\n==\nfoo";
+    const document = "H1\n==\nfoo";
 
-    expect(replaceSection(document, "H1", "bar")).toEqual(
-      "H1\n==\n\nbar\n"
-    );
+    expect(replaceSection(document, "H1", "bar")).toEqual("H1\n==\n\nbar\n");
   });
 
   it("single text heading, new lines", () => {
-    const document =
-      "H1\n==\n\nfoo\n";
+    const document = "H1\n==\n\nfoo\n";
 
     expect(replaceSection(document, "H1", "bar")).toEqual(
       "H1\n==\n\nbar\n\n\n"
@@ -21,8 +17,7 @@ describe("replaceSection", () => {
   });
 
   it("single text heading, more new lines", () => {
-    const document =
-      "H1\n==\n\nfoo\n";
+    const document = "H1\n==\n\nfoo\n";
 
     expect(replaceSection(document, "H1", "bar")).toEqual(
       "H1\n==\n\nbar\n\n\n"
@@ -30,17 +25,13 @@ describe("replaceSection", () => {
   });
 
   it("single heading", () => {
-    const document =
-      "# H1\nfoo";
+    const document = "# H1\nfoo";
 
-    expect(replaceSection(document, "H1", "bar")).toEqual(
-      "# H1\n\nbar\n"
-    );
+    expect(replaceSection(document, "H1", "bar")).toEqual("# H1\n\nbar\n");
   });
 
   it("two headings", () => {
-    const document =
-      "# H1\nfoo\n# H2\nbaz";
+    const document = "# H1\nfoo\n# H2\nbaz";
 
     expect(replaceSection(document, "H1", "bar")).toEqual(
       "# H1\n\nbar\n\n# H2\nbaz"
@@ -48,8 +39,7 @@ describe("replaceSection", () => {
   });
 
   it("two heading, two sub-headings, stop 1", () => {
-    const document =
-      "# H1\nfoo\n## H1.1\nbaz\n## H1.2\n# H2\nbaz";
+    const document = "# H1\nfoo\n## H1.1\nbaz\n## H1.2\n# H2\nbaz";
 
     expect(replaceSection(document, "H1", "bar")).toEqual(
       "# H1\n\nbar\n\n# H2\nbaz"
@@ -57,8 +47,7 @@ describe("replaceSection", () => {
   });
 
   it("two headings, two subheading, not-hungry", () => {
-    const document =
-      "# H1\nfoo\n## H1.1\nbaz\n## H1.2\n# H2\nbaz";
+    const document = "# H1\nfoo\n## H1.1\nbaz\n## H1.2\n# H2\nbaz";
 
     expect(replaceSection(document, "H1", "bar", false)).toEqual(
       "# H1\n\nbar\n\n## H1.1\nbaz\n## H1.2\n# H2\nbaz"
@@ -66,8 +55,7 @@ describe("replaceSection", () => {
   });
 
   it("one headings, one subheading, no content, not-hungry", () => {
-    const document =
-      "# H1\n## H2";
+    const document = "# H1\n## H2";
 
     expect(replaceSection(document, "H1", "bar", false)).toEqual(
       "# H1\n\nbar\n\n## H2"
