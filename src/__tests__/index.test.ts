@@ -61,4 +61,32 @@ describe("replaceSection", () => {
       "# H1\n\nbar\n\n## H2"
     );
   });
+  it("subheading", () => {
+    const document = "# H1\n## H2\n### H3";
+
+    expect(replaceSection(document, "H2", "bar")).toEqual(
+      "# H1\n## H2\n\nbar\n"
+    );
+  });
+  it("subheading, not-hungry", () => {
+    const document = "# H1\n## H2\n### H3";
+
+    expect(replaceSection(document, "H2", "bar", false)).toEqual(
+      "# H1\n## H2\n\nbar\n\n### H3"
+    );
+  });
+  it("sub-subheading", () => {
+    const document = "# H1\n## H2\n### H3";
+
+    expect(replaceSection(document, "H3", "bar", false)).toEqual(
+      "# H1\n## H2\n### H3\n\nbar\n"
+    );
+  });
+  it("heading not found", () => {
+    const document = "# H1\n## H2\n### H3";
+
+    expect(replaceSection(document, "H4", "bar")).toEqual(
+      "# H1\n## H2\n### H3"
+    );
+  });
 });

@@ -20,7 +20,7 @@ export function replaceSection(
 
 function replaceRange(
   document: string,
-  { start, end }: { start: number; end?: number },
+  { start, end }: { start: number; end: number },
   content: string
 ) {
   const before = document.slice(0, start);
@@ -37,16 +37,17 @@ function findSectionRange(node: Root, heading: Heading, hungry = true) {
   const headingIndex = node.children.indexOf(heading);
 
   const sectionStart = heading.position?.end.offset ?? 0;
-  let sectionEnd;
+  let sectionEnd = sectionStart + 1;
 
   for (const sibling of node.children.slice(headingIndex + 1)) {
-    if (sibling.type === "heading") {
-      if (!hungry || sibling.depth === heading.depth) {
-        sectionEnd = sibling.position?.start.offset;
-        break;
-      }
+    if (
+      sibling.type === "heading" &&
+      (!hungry || sibling.depth === heading.depth)
+    ) {
+      sectionEnd = sibling.position?.start.offset ?? sectionEnd;
+      break;
     } else {
-      sectionEnd = sibling.position?.end.offset ?? sectionStart + 1;
+      sectionEnd = sibling.position?.end.offset ?? sectionEnd;
     }
   }
 
