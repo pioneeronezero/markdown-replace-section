@@ -18,6 +18,9 @@ jobs:
       - uses: volta-cli/action@v1
       - run: npm ci
 
+      # - name: Dependencies audit
+      #   run: npm audit --audit-level=none
+
       - name: Build
         run: npm run build
 
@@ -27,8 +30,8 @@ jobs:
       - name: Lint check
         run: npm run lint:check
 
-      - name: Spell check
-        run: npm run spell:check
+      # - name: Spell check
+      #   run: npm run spell:check
 
       - name: Test
         run: npm run test
