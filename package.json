@@ -7,15 +7,15 @@
   "types": "./build/src/index.d.ts",
   "license": "ISC",
   "engines": {
-    "node": "^18.7.0 || >= 16",
-    "npm": "^8.16.0 || >= 8"
+    "node": "^18.14.0 || >= 16",
+    "npm": "^9.4.2 || >= 8"
   },
   "repository": {
     "url": "https://github.com/pioneeronezero/markdown-replace-section"
   },
   "volta": {
-    "node": "18.7.0",
-    "npm": "8.16.0"
+    "node": "18.14.0",
+    "npm": "9.4.2"
   },
   "publishConfig": {
     "access": "public"
