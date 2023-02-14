@@ -1,5 +1,5 @@
-/node_modules
-/npm-debug.log
-markdown-replace-section-*.tgz
-
-/lib
+build/
+node_modules/
+.nyc_output/
+coverage/
+.DS_Store
